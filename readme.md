@@ -17,8 +17,5 @@ Untuk memudahkan UI mengunakan [React Native Element](https://reactnativeelement
 <br/>
 
 # Materi Pembelajaran
-## Installasi & Running
-## Halaman Pertama
-## Navigasi
-## Komponen
+### [Installasi & Running](./docs/installation.md)
 

@@ -6,28 +6,31 @@ import Homepage from '@pages/Homepage';
 import Profile from '@pages/Profile';
 import Bag from '@pages/Bag';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Shop from './pages/Shop';
 
 const Stack = createStackNavigator();
 
 const linking = {
-  // prefixes: ['https://mychat.com', 'mychat://'],
+	// prefixes: ['https://mychat.com', 'mychat://'],
 	screens: {
-    Profile: 'profile',
-    Bag: 'bag',
-    Homepage: '',
-  },
+		shop: 'shop',
+		profile: 'profile',
+		bag: 'bag',
+		homepage: '',
+	},
 };
 
-const app = () => (
+const SayHello = () => (
 	<SafeAreaProvider>
 		<NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
 			<Stack.Navigator>
-				<Stack.Screen name="Homepage" component={Homepage} options={Homepage.options}/>
-				<Stack.Screen name="Profile" component={Profile} />
-				<Stack.Screen name="Bag" component={Bag} options={Bag.options}/>
+				<Stack.Screen name="homepage" component={Homepage} options={Homepage.options} />
+				<Stack.Screen name="profile" component={Profile} />
+				<Stack.Screen name="bag" component={Bag} options={Bag.options} />
+				<Stack.Screen name="shop" component={Shop} options={Shop.options} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	</SafeAreaProvider>
 );
 
-export default app;
+export default SayHello;

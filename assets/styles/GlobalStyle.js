@@ -1,6 +1,8 @@
 const GlobalStyle = {
   pageWrapper: {
-    padding: 13
+    padding: 13,
+    marginTop: 7,
+    backgroundColor: '#fff'
   },
   row: {
     display: 'flex',

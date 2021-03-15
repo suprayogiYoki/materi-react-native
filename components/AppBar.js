@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { Text, View, FlatList, Pressable } from 'react-native';
+import { Text, View, FlatList, Pressable, Linking } from 'react-native';
 import GlobalStyle from '@styles/GlobalStyle';
 import { useNavigation } from '@react-navigation/native';
 
-const style =  {
+const style = {
 	...GlobalStyle,
 	appBar: {
 		...GlobalStyle.row,
-		
+
 	},
 	headerTitle: {
 		marginRight: 17,
@@ -15,42 +15,69 @@ const style =  {
 	}
 };
 
-const menuData = [];
-for (let i = 0; i < 9; i++) {
-	menuData.push({
-		id: `id_${i}`,
-		title: `Menu ke ${i+1}`,
-		link: `/menu-${i+1}`
-	})
-}
+const menuData = [
+	{
+		id: 'shop',
+		title: 'shop',
+		type: 'internal',
+		link: 'shop'
+	},
+	{
+		id: 'react-native',
+		title: 'Documentation',
+		type: 'link',
+		link: 'https://reactnative.dev/docs/getting-started'
+	}
+];
+//for (let i = 0; i < 9; i++) {
+//	menuData.push({
+//		id: `id_${i}`,
+//		title: `Menu ke ${i+1}`,
+//		link: `/menu-${i+1}`
+//	})
+//}
 
-const AppBar = () => (
-	<View style={style.row}>
-		<Text style={style.headerTitle}>Title Here</Text>
-		<HorizontalMenu />
-	</View>
-);
+const AppBar = () => {
+	const homeLink = {
+		id: 'home',
+		type: 'internal',
+		link: 'homepage'
+	}
+	const navigation = useNavigation();
+	return (
+		<View style={style.row}>
+			<Pressable style={{ cursor: 'pointer', marginRight: 7 }} onPress={() => onMenuItmePress({ item: homeLink, navigation })}>
+				<Text style={style.headerTitle}>Title Here</Text>
+			</Pressable>
+			<HorizontalMenu />
+		</View>
+	);
+};
 
 const HorizontalMenu = () => {
 	const navigation = useNavigation();
 	return (
 		<FlatList
 			data={menuData}
-			renderItem={({item, index, separator})=>HorizontalMenuItem({item, navigation})}
+			renderItem={({ item, index, separator }) => HorizontalMenuItem({ item, navigation })}
 			keyExtractor={item => item.id}
 			horizontal={true}
 		/>
 	);
 };
 
-let navigation = null;
 const onMenuItmePress = ({ item, navigation }) => {
-	navigation.navigate('Bag');
+	if (item.type === 'internal') {
+		navigation.navigate(item.link);
+	}
+	else {
+		Linking.openURL(item.link).catch((err) => console.error('An error occurred', err));
+	}
 }
 
-const HorizontalMenuItem = ({item, navigation}) => {
+const HorizontalMenuItem = ({ item, navigation }) => {
 	return (
-		<Pressable onPress={() => onMenuItmePress({ item, navigation })}>
+		<Pressable style={{ cursor: 'pointer', marginRight: 7 }} onPress={() => onMenuItmePress({ item, navigation })}>
 			<Text style={{ marginRight: 7 }}>{item.title}</Text>
 		</Pressable>
 	);

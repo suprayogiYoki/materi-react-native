@@ -7,7 +7,6 @@ const style = {
 	...GlobalStyle,
 	appBar: {
 		...GlobalStyle.row,
-
 	},
 	headerTitle: {
 		marginRight: 17,
@@ -18,7 +17,7 @@ const style = {
 const menuData = [
 	{
 		id: 'shop',
-		title: 'shop',
+		title: 'Shop',
 		type: 'internal',
 		link: 'shop'
 	},

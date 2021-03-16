@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, Image } from 'react-native';
 import AppBar from '@components/AppBar';
 import style from '@styles/GlobalStyle';
-import { Image } from 'react-native-elements';
 
 const Homepage = ({ navigation }) => (
   <ScrollView>
@@ -10,7 +9,6 @@ const Homepage = ({ navigation }) => (
       <Image
         source={require('@images/play-store.png')}
         style={{ width: 200, height: 200 }}
-        PlaceholderContent={<ActivityIndicator />}
       />
       <Text> Welcome back master.</Text>
     </View>

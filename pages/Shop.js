@@ -1,57 +1,44 @@
 import * as React from 'react';
-import { View, Text, ScrollView, ActivityIndicator, Image } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import AppBar from '@components/AppBar';
-import style from '@styles/GlobalStyle';
+import globalStyle from '@styles/GlobalStyle';
+import ProductPreview from '../components/ProductPreview';
 
 const items = [];
 
 for (let i = 0; i < 9; i++) {
-	items.push({
+	let data = {
 		images: [
-			'image one'
+			require('@images/play-store.png')
 		],
 		name: `product ke-${i}`,
-		price: i * 1000,
-		normalPrice: i * 1000 + 50
-	});
+		currencry: 'IDR',
+		price: (i + 1) * 1000,
+		normalPrice: ((i + 1) * 1000) + 500
+	}
+	if (i % 2 === 0 || i % 3 === 0) {
+		delete data.normalPrice;
+	}
+	items.push(data);
 }
 
 const Shop = ({ navigation }) => (
 	<ScrollView>
-		<View style={style.pageWrapper}>
-			<Text> Here's your Shop </Text>
-			<View style={{ ...style.row, flexWrap: 'wrap' }}>
-				{items.map(ItemPreview)}
+		<View style={globalStyle.pageWrapper}>
+			<Text> Here's our product </Text>
+			{/* product list */}
+			<View style={style.productWrapper}>
+				{items.map(ProductPreview)}
 			</View>
 		</View>
 	</ScrollView>
 );
-
-const ItemPreview = (item, i) => (
-	<View
-		style={{
-			...style.column,
-			minWidth: 150,
-			maxWidth: '50%',
-			height: 300
-		}}
-		key={`itempreview-ke-${i}`}
-	>
-		<Image
-			source={require('@images/play-store.png')}
-			style={{
-				flex: 1,
-				height: undefined,
-				width: undefined,
-				aspectRatio: 0.5
-			}}
-			resizeMode="contain"
-		/>
-		<Text>Nama</Text>
-		<Text>Price</Text>
-		<Text>Action</Text>
-	</View>
-);
+const style = {
+	productWrapper: {
+		...globalStyle.row,
+		flexWrap: 'wrap',
+	}
+}
 
 Shop.options = {
 	headerTitle: props => <AppBar {...props} />
